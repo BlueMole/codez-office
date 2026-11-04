@@ -341,6 +341,9 @@
   var TEAM_COLORS = ['#a78bfa', '#60a5fa', '#34d399', '#fbbf24', '#f472b6', '#22d3ee', '#fb923c', '#a3e635'];
   function teamColor(t) {
     if (!t) return '#64748b';
+    var members = (S.teams && S.teams[t]) || [], counts = {}, best = null;
+    members.forEach(function (m) { var c = S.looks[m] && S.looks[m].color; if (c) { c = c.toLowerCase(); counts[c] = (counts[c] || 0) + 1; if (!best || counts[c] > counts[best]) best = c; } });
+    if (best) return '#' + best;
     var h = 0; for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) >>> 0;
     return TEAM_COLORS[h % TEAM_COLORS.length];
   }
@@ -366,7 +369,7 @@
       row.appendChild(lab);
       var track = el('div', 'uc-track'), fill = el('div', 'uc-fill');
       var team = S._teamOf && S._teamOf[r.bot];
-      fill.style.background = teamColor(team);
+      fill.style.background = S.looks[r.bot] && S.looks[r.bot].color ? '#' + S.looks[r.bot].color : teamColor(team);
       fill.style.width = r.v == null ? '0' : Math.max(0, Math.min(100, r.v / scale * 100)) + '%';
       track.appendChild(fill); row.appendChild(track);
       row.appendChild(el('div', 'uc-val', r.v == null ? '—' : Math.round(r.v * 10) / 10 + '%'));
