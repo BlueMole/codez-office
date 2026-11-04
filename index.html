@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://ntfy.sh; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>Codez Office</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <div class="brand">🏢 Codez Office</div>
+  <div class="clock" id="clock">--:--:--</div>
+  <div class="usage" id="usage" title="Weekly usage">
+    <span class="usage-label">Weekly usage</span>
+    <div class="meter"><div class="meter-fill" id="usageFill"></div></div>
+    <span id="usageText">—</span>
+  </div>
+  <div class="updated">Feed updated: <span id="feedUpdated">—</span> <span id="conn" class="conn off" title="connection">●</span></div>
+</header>
+<main id="main">
+  <section id="buildingWrap">
+    <div id="notice" class="notice" hidden></div>
+    <div id="building"></div>
+  </section>
+  <aside id="side">
+    <h2>Upcoming routines</h2>
+    <ol id="routines"><li class="empty">No routines in feed.</li></ol>
+  </aside>
+</main>
+<div id="panel" hidden>
+  <div class="panel-card">
+    <button id="panelClose" aria-label="Close">×</button>
+    <h3 id="pName"></h3>
+    <dl>
+      <dt>Status</dt><dd id="pStatus"></dd>
+      <dt>Step</dt><dd id="pStep"></dd>
+      <dt>Last update</dt><dd id="pTime"></dd>
+      <dt>Team</dt><dd id="pTeam"></dd>
+      <dt>Usage share</dt><dd id="pUsage"></dd>
+    </dl>
+    <h4>Routines</h4>
+    <ul id="pRoutines"></ul>
+    <div id="pChat"></div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
