@@ -202,7 +202,7 @@
       var desk = fe.f.desks[idx];
       if (desk) desk.el.className = 'desk' + (st === 'working' ? ' on' : '');
       if ((st === 'idle' || st === 'done') || !desk) { b._wander = true; b.style.left = b._x + '%'; }
-      else { b.style.left = desk.x + '%'; }
+      else { b.style.left = desk.x + '%'; b.classList.add('seated'); }
     });
     if (benchRow && !benchRow.children.length) benchRow.appendChild(el('span', 'empty', 'Nobody on the bench.'));
     else if (benchRow) Array.prototype.slice.call(benchRow.querySelectorAll('.empty')).forEach(function (x) { if (benchRow.children.length > 1) benchRow.removeChild(x); });
