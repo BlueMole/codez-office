@@ -28,7 +28,7 @@
   // ---------- state (only what the feed says) ----------
   var S = {
     roster: [], statuses: {}, looks: {}, teams: null, teamsOrder: [], chat: {},
-    routines: {}, usage: null, lastFeed: null
+    routines: {}, usage: null, lastFeed: null, kevin: {}
   };
   var seen = {}; var lastId = null;
 
@@ -82,12 +82,29 @@
         });
       }
     }
+    if (isObj(p.kevin_items)) {
+      var kb = name(p.kevin_items.bot);
+      if (kb && Array.isArray(p.kevin_items.items)) {
+        S.kevin[kb] = p.kevin_items.items.filter(isObj).slice(0, 100).map(function (it) {
+          return { title: str(it.title, MAX_TEXT) || '', since: toDate(it.since) };
+        }).filter(function (it) { return it.title.trim(); });
+        if (!S.kevin[kb].length) delete S.kevin[kb];
+      }
+    }
     if (p.type === 'usage') {
       var u = { pct: null, resets: null, resetsRaw: '', bots: {} };
       var tp = Number(p.total_used_pct); if (p.total_used_pct != null && isFinite(tp)) u.pct = Math.max(0, Math.min(100, tp));
       u.resets = toDate(p.resets_at); u.resetsRaw = str(p.resets_at, 60) || '';
       if (isObj(p.bots)) Object.keys(p.bots).forEach(function (k) {
         var n = name(k), v = Number(p.bots[k]); if (n && p.bots[k] != null && isFinite(v)) u.bots[n] = v;
+      });
+      // also accept bots:[{bot|name, pct|share|used_pct}] and shares:{name: pct}
+      if (Array.isArray(p.bots)) p.bots.filter(isObj).forEach(function (o) {
+        var n = name(o.bot != null ? o.bot : o.name), raw = o.pct != null ? o.pct : (o.share != null ? o.share : o.used_pct), v = Number(raw);
+        if (n && raw != null && isFinite(v)) u.bots[n] = v;
+      });
+      if (isObj(p.shares)) Object.keys(p.shares).forEach(function (k) {
+        var n = name(k), v = Number(p.shares[k]); if (n && p.shares[k] != null && isFinite(v)) u.bots[n] = v;
       });
       S.usage = u;
     }
@@ -207,7 +224,7 @@
     if (benchRow && !benchRow.children.length) benchRow.appendChild(el('span', 'empty', 'Nobody on the bench.'));
     else if (benchRow) Array.prototype.slice.call(benchRow.querySelectorAll('.empty')).forEach(function (x) { if (benchRow.children.length > 1) benchRow.removeChild(x); });
 
-    renderTop(); renderRoutines();
+    renderTop(); renderRoutines(); renderKevin(); renderUsageChart();
   }
 
   function wander() {
@@ -243,6 +260,99 @@
       list.appendChild(li);
     });
   }
+
+  // ---------- Kevin open items ----------
+  function fmtAge(d) {
+    if (!d) return '';
+    var s = Math.max(0, (Date.now() - d.getTime()) / 1000);
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.floor(s / 60) + 'm ago';
+    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    return Math.floor(s / 86400) + 'd ago';
+  }
+  function miniBot(n) {
+    var look = S.looks[n] || {};
+    var m = el('span', 'mini shape ' + (look.shape || 'orb'));
+    m.style.setProperty('--c', '#' + (look.color || '94a3b8'));
+    return m;
+  }
+  function kevinItems() {
+    var out = [];
+    Object.keys(S.kevin).forEach(function (b) { S.kevin[b].forEach(function (it) { out.push({ bot: b, title: it.title, since: it.since, tag: null }); }); });
+    Object.keys(S.statuses).forEach(function (b) {
+      var s = S.statuses[b];
+      if (s.status !== 'waiting_user' && s.status !== 'error') return;
+      var title = s.step || (s.status === 'error' ? 'Error (no details in feed)' : 'Waiting on you (no details in feed)');
+      var dup = (S.kevin[b] || []).some(function (it) { return it.title.trim() === title.trim(); });
+      if (!dup) out.push({ bot: b, title: title, since: new Date(s.time), tag: s.status === 'error' ? 'error' : 'waiting' });
+    });
+    out.sort(function (a, c) {
+      var x = a.since ? a.since.getTime() : Infinity, y = c.since ? c.since.getTime() : Infinity;
+      return x - y || a.bot.localeCompare(c.bot);
+    });
+    return out;
+  }
+  function renderKevin() {
+    var list = $('kevinList'); if (!list) return;
+    var items = kevinItems();
+    $('kevinCount').textContent = String(items.length);
+    list.textContent = '';
+    if (!items.length) { list.appendChild(el('li', 'empty', 'Nothing waiting on you.')); return; }
+    items.forEach(function (it) {
+      var li = el('li', 'ki' + (it.tag ? ' ' + it.tag : ''));
+      var who = el('span', 'ki-bot'); who.appendChild(miniBot(it.bot)); who.appendChild(el('span', 'ki-name', it.bot));
+      li.appendChild(who);
+      var body = el('span', 'ki-body');
+      if (it.tag) body.appendChild(el('span', 'tag ' + it.tag, it.tag));
+      body.appendChild(el('span', 'ki-title', it.title));
+      li.appendChild(body);
+      var age = el('span', 'ki-age', fmtAge(it.since));
+      if (it.since) age.title = it.since.toLocaleString();
+      li.appendChild(age);
+      if (S.chat[it.bot]) { var a = el('a', 'ki-open', 'Open'); a.href = S.chat[it.bot]; a.rel = 'noopener noreferrer'; li.appendChild(a); }
+      else li.appendChild(el('span', 'ki-open off', '—'));
+      list.appendChild(li);
+    });
+  }
+
+  // ---------- bot usage chart ----------
+  var TEAM_COLORS = ['#a78bfa', '#60a5fa', '#34d399', '#fbbf24', '#f472b6', '#22d3ee', '#fb923c', '#a3e635'];
+  function teamColor(t) {
+    if (!t) return '#64748b';
+    var h = 0; for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) >>> 0;
+    return TEAM_COLORS[h % TEAM_COLORS.length];
+  }
+  function renderUsageChart() {
+    var box = $('usageChart'); if (!box) return;
+    var u = S.usage;
+    $('ucTotal').textContent = u && u.pct != null ? Math.round(u.pct * 10) / 10 + '% used' : 'Total —';
+    $('ucReset').textContent = u && u.resets ? 'Resets ' + fmtTime(u.resets) : (u && u.resetsRaw ? 'Resets ' + u.resetsRaw : '');
+    var bots = S.roster.length ? S.roster.slice() : knownBots();
+    var rows = bots.map(function (b) { return { bot: b, v: u && own(u.bots, b) ? u.bots[b] : null }; });
+    rows.sort(function (a, c) {
+      if (a.v == null && c.v == null) return a.bot.localeCompare(c.bot);
+      if (a.v == null) return 1; if (c.v == null) return -1;
+      return c.v - a.v || a.bot.localeCompare(c.bot);
+    });
+    var max = rows.reduce(function (m, r) { return r.v != null && r.v > m ? r.v : m; }, 0);
+    var scale = max > 100 ? max : 100;
+    box.textContent = '';
+    if (!rows.length) { box.appendChild(el('div', 'empty', 'No bots in the feed yet.')); return; }
+    rows.forEach(function (r) {
+      var row = el('div', 'uc-row' + (r.v == null ? ' none' : ''));
+      var lab = el('div', 'uc-label'); lab.appendChild(miniBot(r.bot)); lab.appendChild(el('span', 'uc-name', r.bot));
+      row.appendChild(lab);
+      var track = el('div', 'uc-track'), fill = el('div', 'uc-fill');
+      var team = S._teamOf && S._teamOf[r.bot];
+      fill.style.background = teamColor(team);
+      fill.style.width = r.v == null ? '0' : Math.max(0, Math.min(100, r.v / scale * 100)) + '%';
+      track.appendChild(fill); row.appendChild(track);
+      row.appendChild(el('div', 'uc-val', r.v == null ? '—' : Math.round(r.v * 10) / 10 + '%'));
+      row.title = r.bot + (team ? ' · ' + team : '') + ' · ' + (r.v == null ? 'no share reported' : r.v + '%');
+      box.appendChild(row);
+    });
+  }
+  setInterval(renderKevin, 30000);
 
   // ---------- details panel ----------
   var panelBot = null;
