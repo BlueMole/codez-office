@@ -18,3 +18,16 @@ Each post **replaces** that bot's list; `"items":[]` clears it. Bots whose lates
 `waiting_user` or `error` also get an item from their `step` text (tagged *waiting* / *error*)
 unless the same text is already in that bot's `kevin_items`. Items sort oldest first; the
 **Open** button uses the bot's `grokbot://` link from the `chat` map.
+
+### Team boards
+
+```json
+{"board":{"team":"Inoltro Stack","bot":"OZZIE","updated":"<ISO>","items":[
+  {"title":"Ship v2","status":"working|waiting_kevin|blocked|next|done","owner":"OZZIE","since":"<ISO>","due":"<ISO, optional>"}]}}
+```
+
+Each post **replaces** that team's board (keyed by `team`). `open` is accepted and treated as `next`.
+Each card shows three columns: **Working on** (`working` + `blocked`, blocked flagged and listed first),
+**Owed to you** (`waiting_kevin`), **Up next** (`next`), plus `done` collapsed behind a count. Owner, age and due
+are shown; overdue dues are highlighted. `waiting_kevin` items also appear in Kevin open items, tagged with
+the team name, with Open linking to the posting `bot`'s chat link. Columns stack on mobile.

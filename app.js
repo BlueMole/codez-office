@@ -28,7 +28,7 @@
   // ---------- state (only what the feed says) ----------
   var S = {
     roster: [], statuses: {}, looks: {}, teams: null, teamsOrder: [], chat: {},
-    routines: {}, usage: null, lastFeed: null, kevin: {}
+    routines: {}, usage: null, lastFeed: null, kevin: {}, boards: {}
   };
   var seen = {}; var lastId = null;
 
@@ -89,6 +89,20 @@
           return { title: str(it.title, MAX_TEXT) || '', since: toDate(it.since) };
         }).filter(function (it) { return it.title.trim(); });
         if (!S.kevin[kb].length) delete S.kevin[kb];
+      }
+    }
+    if (isObj(p.board)) {
+      var bt = name(p.board.team);
+      if (bt && Array.isArray(p.board.items)) {
+        var BS = ['working', 'waiting_kevin', 'blocked', 'next', 'done'];
+        S.boards[bt] = {
+          team: bt, bot: name(p.board.bot), updated: toDate(p.board.updated) || new Date(t),
+          items: p.board.items.filter(isObj).slice(0, 200).map(function (it) {
+            var st = it.status === 'open' ? 'next' : it.status;
+            return { title: str(it.title, MAX_TEXT) || '', status: BS.indexOf(st) >= 0 ? st : 'next',
+              owner: name(it.owner), since: toDate(it.since), due: toDate(it.due) };
+          }).filter(function (it) { return it.title.trim(); })
+        };
       }
     }
     if (p.type === 'usage') {
@@ -224,7 +238,7 @@
     if (benchRow && !benchRow.children.length) benchRow.appendChild(el('span', 'empty', 'Nobody on the bench.'));
     else if (benchRow) Array.prototype.slice.call(benchRow.querySelectorAll('.empty')).forEach(function (x) { if (benchRow.children.length > 1) benchRow.removeChild(x); });
 
-    renderTop(); renderRoutines(); renderKevin(); renderUsageChart();
+    renderTop(); renderRoutines(); renderKevin(); renderBoards(); renderUsageChart();
   }
 
   function wander() {
@@ -286,6 +300,12 @@
       var dup = (S.kevin[b] || []).some(function (it) { return it.title.trim() === title.trim(); });
       if (!dup) out.push({ bot: b, title: title, since: new Date(s.time), tag: s.status === 'error' ? 'error' : 'waiting' });
     });
+    Object.keys(S.boards).forEach(function (tn) {
+      var bd = S.boards[tn];
+      bd.items.forEach(function (it) {
+        if (it.status === 'waiting_kevin') out.push({ bot: bd.bot || tn, title: it.title, since: it.since || bd.updated, tag: null, team: tn, chatBot: bd.bot });
+      });
+    });
     out.sort(function (a, c) {
       var x = a.since ? a.since.getTime() : Infinity, y = c.since ? c.since.getTime() : Infinity;
       return x - y || a.bot.localeCompare(c.bot);
@@ -304,12 +324,14 @@
       li.appendChild(who);
       var body = el('span', 'ki-body');
       if (it.tag) body.appendChild(el('span', 'tag ' + it.tag, it.tag));
+      if (it.team) body.appendChild(el('span', 'tag team', it.team));
       body.appendChild(el('span', 'ki-title', it.title));
       li.appendChild(body);
       var age = el('span', 'ki-age', fmtAge(it.since));
       if (it.since) age.title = it.since.toLocaleString();
       li.appendChild(age);
-      if (S.chat[it.bot]) { var a = el('a', 'ki-open', 'Open'); a.href = S.chat[it.bot]; a.rel = 'noopener noreferrer'; li.appendChild(a); }
+      var cb = it.team ? it.chatBot : it.bot;
+      if (cb && S.chat[cb]) { var a = el('a', 'ki-open', 'Open'); a.href = S.chat[cb]; a.rel = 'noopener noreferrer'; li.appendChild(a); }
       else li.appendChild(el('span', 'ki-open off', '—'));
       list.appendChild(li);
     });
@@ -352,7 +374,76 @@
       box.appendChild(row);
     });
   }
-  setInterval(renderKevin, 30000);
+  // ---------- team boards ----------
+  var COLS = [
+    { key: 'work', label: 'Working on', match: ['working', 'blocked'] },
+    { key: 'owed', label: 'Owed to you', match: ['waiting_kevin'] },
+    { key: 'next', label: 'Up next', match: ['next'] }
+  ];
+  function fmtDue(d) { return d.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+  function boardItem(it) {
+    var li = el('li', 'bi ' + it.status);
+    var top = el('div', 'bi-top');
+    if (it.status === 'blocked') top.appendChild(el('span', 'tag error', 'blocked'));
+    top.appendChild(el('span', 'bi-title', it.title));
+    li.appendChild(top);
+    var meta = el('div', 'bi-meta');
+    if (it.owner) meta.appendChild(el('span', null, it.owner));
+    if (it.since) { var a = el('span', null, fmtAge(it.since)); a.title = it.since.toLocaleString(); meta.appendChild(a); }
+    if (it.due) {
+      var over = it.status !== 'done' && it.due.getTime() < Date.now();
+      meta.appendChild(el('span', 'due' + (over ? ' overdue' : ''), (over ? 'overdue · ' : 'due ') + fmtDue(it.due)));
+    }
+    if (meta.children.length) li.appendChild(meta);
+    return li;
+  }
+  function byAge(a, c) {
+    var x = a.since ? a.since.getTime() : Infinity, y = c.since ? c.since.getTime() : Infinity;
+    return x - y;
+  }
+  function renderBoards() {
+    var box = $('boards'); if (!box) return;
+    box.textContent = '';
+    var teams = Object.keys(S.boards);
+    if (!teams.length) { box.appendChild(el('div', 'empty', 'No team boards posted yet.')); return; }
+    var order = [];
+    if (own(S.boards, 'HQ')) order.push('HQ');
+    S.teamsOrder.forEach(function (t) { if (own(S.boards, t) && order.indexOf(t) < 0) order.push(t); });
+    teams.sort().forEach(function (t) { if (order.indexOf(t) < 0) order.push(t); });
+    order.forEach(function (tn) {
+      var bd = S.boards[tn];
+      var card = el('div', 'board');
+      card.style.setProperty('--tc', teamColor(tn));
+      var h = el('div', 'board-head');
+      h.appendChild(el('span', 'board-name', tn));
+      var up = el('span', 'board-up', 'updated ' + fmtAge(bd.updated) + (bd.bot ? ' · ' + bd.bot : ''));
+      up.title = bd.updated.toLocaleString(); h.appendChild(up);
+      card.appendChild(h);
+      var cols = el('div', 'board-cols');
+      COLS.forEach(function (c) {
+        var items = bd.items.filter(function (i) { return c.match.indexOf(i.status) >= 0; }).sort(function (a, b) {
+          return (c.key === 'work' ? (a.status === 'blocked' ? 0 : 1) - (b.status === 'blocked' ? 0 : 1) : 0) || byAge(a, b);
+        });
+        var col = el('div', 'bcol ' + c.key);
+        var ch = el('h5', null, c.label); ch.appendChild(el('span', 'count', String(items.length)));
+        col.appendChild(ch);
+        var ul = el('ul', 'bi-list');
+        if (!items.length) ul.appendChild(el('li', 'empty', 'Nothing here.'));
+        items.forEach(function (it) { ul.appendChild(boardItem(it)); });
+        col.appendChild(ul); cols.appendChild(col);
+      });
+      card.appendChild(cols);
+      var done = bd.items.filter(function (i) { return i.status === 'done'; }).sort(byAge);
+      if (done.length) {
+        var det = el('details', 'bi-done');
+        det.appendChild(el('summary', null, 'Done (' + done.length + ')'));
+        var dl = el('ul', 'bi-list'); done.forEach(function (it) { dl.appendChild(boardItem(it)); });
+        det.appendChild(dl); card.appendChild(det);
+      }
+      box.appendChild(card);
+    });
+  }
+  setInterval(function () { renderKevin(); renderBoards(); }, 30000);
 
   // ---------- details panel ----------
   var panelBot = null;
