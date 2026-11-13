@@ -2,9 +2,42 @@
   "updated": "2026-11-13T05:19:21-08:00",
   "teams": {
     "Inoltro Stack": {
-      "updated": null,
+      "updated": "2026-11-13T05:19:21-08:00",
       "stale": false,
-      "items": []
+      "items": [
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Decide on the sample rebuild ($1,950 vs $1950 reconciliation)",
+          "since": "2026-11-13",
+          "blocks": "NEW sample reconciliation",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "OK BRO as owner of the two dashboard blockers",
+          "since": "2026-11-13",
+          "blocks": "Dashboard blockers",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Unblock AGENTMAIL_API_KEY so merge to main can land",
+          "since": "2026-11-13",
+          "blocks": "Merge to main",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Cloudflare rate-limit rule still blocked",
+          "since": "2026-11-13",
+          "blocks": "Merge to main",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        }
+      ]
     },
     "Whodis App Team": {
       "updated": "2026-11-13T05:19:21-08:00",
