@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://ntfy.sh; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' https://ntfy.sh; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <title>Codez Office</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
@@ -20,6 +20,13 @@
   </div>
   <div class="updated">Feed updated: <span id="feedUpdated">—</span> <span id="conn" class="conn off" title="connection">●</span></div>
 </header>
+<section id="holdupsWrap">
+  <section class="card" id="holdups">
+    <h2>Holding things back <span class="count" id="holdupsCount">0</span></h2>
+    <p id="holdupsNote" class="hu-example" hidden>Example data</p>
+    <div id="holdupsList"><div class="empty">Nothing waiting on you.</div></div>
+  </section>
+</section>
 <main id="main">
   <section id="buildingWrap">
     <div id="notice" class="notice" hidden></div>
@@ -31,10 +38,6 @@
   </aside>
 </main>
 <section id="below">
-  <section class="card" id="kevinCard">
-    <h2>Kevin open items <span class="count" id="kevinCount">0</span></h2>
-    <ul id="kevinList"><li class="empty">Nothing waiting on you.</li></ul>
-  </section>
   <section class="card" id="usageCard">
     <h2>Bot usage</h2>
     <div class="uc-head"><span id="ucTotal">Total —</span><span id="ucReset"></span></div>
