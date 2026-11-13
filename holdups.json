@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-13T15:23:36-08:00",
+  "updated": "2026-11-13T15:23:53-08:00",
   "teams": {
     "Inoltro Stack": {
-      "updated": "2026-11-13T15:23:36-08:00",
+      "updated": "2026-11-13T15:23:53-08:00",
       "stale": false,
       "items": [
         {
@@ -46,12 +46,12 @@
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
-          "bot": "Páidí",
-          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
-          "title": "Decide on the \"4-hour\" tag in Phil's runbook",
+          "bot": "FIL",
+          "bot_id": "d4268a05-c022-49c8-8420-21810e04537c",
+          "title": "Decide on the \"4-hour\" tag in Phil's runbook (reads as a response-time promise)",
           "since": "2026-11-12",
           "blocks": "Fulfilment runbook",
-          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+          "url": "grokbot://app/v1/agent?id=d4268a05-c022-49c8-8420-21810e04537c"
         },
         {
           "bot": "Páidí",
