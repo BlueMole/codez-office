@@ -1,5 +1,5 @@
 {
-  "updated": null,
+  "updated": "2026-11-13T05:19:21-08:00",
   "teams": {
     "Inoltro Stack": {
       "updated": null,
@@ -7,9 +7,42 @@
       "items": []
     },
     "Whodis App Team": {
-      "updated": null,
+      "updated": "2026-11-13T05:19:21-08:00",
       "stale": false,
-      "items": []
+      "items": [
+        {
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
+          "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
+          "title": "Say whether Becky should fully delete blumole-git Railway project + DB",
+          "since": "2026-11-12",
+          "blocks": "Small ongoing Railway bill",
+          "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
+        },
+        {
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
+          "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
+          "title": "Send public Turnstile site key for community reports form",
+          "since": "2026-10-31",
+          "blocks": "Spam-board report form",
+          "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
+        },
+        {
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
+          "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
+          "title": "Renew Ryze plan or connect Google Ads access",
+          "since": "2026-11-11",
+          "blocks": "Ads search-term + conversion checks",
+          "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
+        },
+        {
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
+          "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
+          "title": "Decide YouTube: Whodis channel, personal, or skip",
+          "since": "2026-10-23",
+          "blocks": "YouTube posting via Buffer",
+          "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
+        }
+      ]
     }
   }
 }
