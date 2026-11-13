@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T05:19:43-08:00",
+  "updated": "2026-11-13T15:23:29-08:00",
   "teams": {
     "Inoltro Stack": {
       "updated": "2026-11-13T05:19:43-08:00",
@@ -64,15 +64,15 @@
       ]
     },
     "Whodis App Team": {
-      "updated": "2026-11-13T05:19:21-08:00",
-      "stale": true,
+      "updated": "2026-11-13T15:23:29-08:00",
+      "stale": false,
       "items": [
         {
           "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
-          "title": "Say whether Becky should fully delete blumole-git Railway project + DB",
+          "title": "Say whether Becky should fully delete blumole-git Railway project + its DB",
           "since": "2026-11-12",
-          "blocks": "Small ongoing Railway bill",
+          "blocks": "small ongoing Railway bill",
           "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
         },
         {
@@ -80,7 +80,7 @@
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
           "title": "Send public Turnstile site key for community reports form",
           "since": "2026-10-31",
-          "blocks": "Spam-board report form",
+          "blocks": "Lingxi wiring spam-board report form",
           "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
         },
         {
@@ -88,13 +88,13 @@
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
           "title": "Renew Ryze plan or connect Google Ads access",
           "since": "2026-11-11",
-          "blocks": "Ads search-term + conversion checks",
+          "blocks": "ads search-term hygiene + conversion checks",
           "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
         },
         {
           "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
-          "title": "Decide YouTube: Whodis channel, personal, or skip",
+          "title": "Decide YouTube: Whodis channel, personal channel, or skip",
           "since": "2026-10-23",
           "blocks": "YouTube posting via Buffer",
           "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
