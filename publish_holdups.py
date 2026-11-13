@@ -78,7 +78,7 @@ def resolve_bot(bot: str, profiles: dict[str, str]) -> tuple[str, str]:
 
 def parse_items(raw: str) -> list[dict[str, Any]]:
     path = Path(raw)
-    if path.is_file():
+    if len(str(path)) < 255 and path.is_file():
         text = path.read_text()
     else:
         text = raw
