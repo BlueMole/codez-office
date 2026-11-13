@@ -1,40 +1,64 @@
 {
-  "updated": "2026-11-13T05:19:21-08:00",
+  "updated": "2026-11-13T05:19:43-08:00",
   "teams": {
     "Inoltro Stack": {
-      "updated": "2026-11-13T05:19:21-08:00",
+      "updated": "2026-11-13T05:19:43-08:00",
       "stale": false,
       "items": [
         {
           "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
-          "title": "Decide on the sample rebuild ($1,950 vs $1950 reconciliation)",
-          "since": "2026-11-13",
-          "blocks": "NEW sample reconciliation",
+          "title": "OK BRO as owner of the 2 website-merge blockers (AgentMail key, Cloudflare rule)",
+          "since": "2026-11-12",
+          "blocks": "Website merge to main",
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
           "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
-          "title": "OK BRO as owner of the two dashboard blockers",
+          "title": "Decide whether to rebuild the sample ($1,950 vs $1950 mismatch)",
           "since": "2026-11-13",
-          "blocks": "Dashboard blockers",
+          "blocks": "Sample reconciliation",
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
           "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
-          "title": "Unblock AGENTMAIL_API_KEY so merge to main can land",
-          "since": "2026-11-13",
-          "blocks": "Merge to main",
+          "title": "Pick the phone-support provider",
+          "since": "2026-11-12",
+          "blocks": "Order 1 support setup",
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
           "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
-          "title": "Cloudflare rate-limit rule still blocked",
+          "title": "Decide on Facebook/Instagram setup",
+          "since": "2026-11-12",
+          "blocks": "Organic scan ads (wk of Nov 24)",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Clarify Claude's \"item 1\" (doc text cut off)",
+          "since": "2026-11-12",
+          "blocks": "Claude task queue",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Decide on the \"4-hour\" tag in Phil's runbook",
+          "since": "2026-11-12",
+          "blocks": "Fulfilment runbook",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Confirm the rebuilt Gantt file opens in GanttProject",
           "since": "2026-11-13",
-          "blocks": "Merge to main",
+          "blocks": "Repo Gantt replacement",
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         }
       ]
