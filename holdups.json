@@ -3,7 +3,7 @@
   "teams": {
     "Inoltro Stack": {
       "updated": "2026-11-14T05:19:19-08:00",
-      "stale": false,
+      "stale": true,
       "items": [
         {
           "bot": "Páidí",
@@ -65,7 +65,7 @@
     },
     "Whodis App Team": {
       "updated": "2026-11-14T05:19:07-08:00",
-      "stale": false,
+      "stale": true,
       "items": [
         {
           "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
