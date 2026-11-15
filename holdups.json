@@ -6,7 +6,7 @@
       "stale": true,
       "items": [
         {
-          "bot": "P\u00e1id\u00ed",
+          "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
           "title": "OK BRO as owner of the 2 website-merge blockers (AgentMail key, Cloudflare rule)",
           "since": "2026-11-12",
@@ -14,7 +14,7 @@
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
-          "bot": "P\u00e1id\u00ed",
+          "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
           "title": "Decide whether to rebuild the sample ($1,950 vs $1950 mismatch)",
           "since": "2026-11-13",
@@ -22,7 +22,7 @@
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
-          "bot": "P\u00e1id\u00ed",
+          "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
           "title": "Pick the phone-support provider",
           "since": "2026-11-12",
@@ -30,7 +30,7 @@
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
-          "bot": "P\u00e1id\u00ed",
+          "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
           "title": "Decide on Facebook/Instagram setup",
           "since": "2026-11-12",
@@ -38,7 +38,7 @@
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         },
         {
-          "bot": "P\u00e1id\u00ed",
+          "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
           "title": "Clarify Claude's \"item 1\" (doc text cut off)",
           "since": "2026-11-12",
@@ -54,7 +54,7 @@
           "url": "grokbot://app/v1/agent?id=d4268a05-c022-49c8-8420-21810e04537c"
         },
         {
-          "bot": "P\u00e1id\u00ed",
+          "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
           "title": "Confirm the rebuilt Gantt file opens in GanttProject",
           "since": "2026-11-13",
@@ -68,7 +68,7 @@
       "stale": true,
       "items": [
         {
-          "bot": "Whodis Chief of Staff \u00b7 Chief of Staff for Whodisapp team",
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
           "title": "Say whether Becky should fully delete blumole-git Railway project + its DB",
           "since": "2026-11-12",
@@ -76,7 +76,7 @@
           "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
         },
         {
-          "bot": "Whodis Chief of Staff \u00b7 Chief of Staff for Whodisapp team",
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
           "title": "Send public Turnstile site key for community reports form",
           "since": "2026-10-31",
@@ -84,7 +84,7 @@
           "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
         },
         {
-          "bot": "Whodis Chief of Staff \u00b7 Chief of Staff for Whodisapp team",
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
           "title": "Renew Ryze plan or connect Google Ads access",
           "since": "2026-11-11",
@@ -92,7 +92,7 @@
           "url": "grokbot://app/v1/agent?id=61f39587-91d9-4f4b-8ee8-098434cdf4d4"
         },
         {
-          "bot": "Whodis Chief of Staff \u00b7 Chief of Staff for Whodisapp team",
+          "bot": "Whodis Chief of Staff · Chief of Staff for Whodisapp team",
           "bot_id": "61f39587-91d9-4f4b-8ee8-098434cdf4d4",
           "title": "Decide YouTube: Whodis channel, personal channel, or skip",
           "since": "2026-10-23",
