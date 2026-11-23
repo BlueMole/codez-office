@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-23T05:17:43-08:00",
+  "updated": "2026-11-23T15:23:59-08:00",
   "teams": {
     "Inoltro Stack": {
-      "updated": "2026-11-23T05:17:25-08:00",
+      "updated": "2026-11-23T15:23:59-08:00",
       "stale": false,
       "items": [
         {
@@ -67,6 +67,14 @@
           "title": "Confirm the rebuilt Gantt file opens in GanttProject",
           "since": "2026-11-13",
           "blocks": "Repo Gantt replacement",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Say yes/no to a TalkTo routine so Páidí answers DMs and mentions alone",
+          "since": "2026-11-23",
+          "blocks": "TalkTo auto-answer",
           "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
         }
       ]
