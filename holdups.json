@@ -1,10 +1,26 @@
 {
-  "updated": "2026-11-26T15:17:11-08:00",
+  "updated": "2026-11-27T05:17:40-08:00",
   "teams": {
     "Inoltro Stack": {
-      "updated": "2026-11-26T15:17:08-08:00",
+      "updated": "2026-11-27T05:17:40-08:00",
       "stale": false,
       "items": [
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Say if 2.3/2.4 site check and 2.5 prospect list are done (>48h overdue)",
+          "since": "2026-11-27",
+          "blocks": "organic scan ads",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
+        {
+          "bot": "Páidí",
+          "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
+          "title": "Approve Scan Terms (2.2) once the legal review lands",
+          "since": "2026-11-27",
+          "blocks": "scan offer go-live",
+          "url": "grokbot://app/v1/agent?id=110e6cb8-1c30-4a51-a786-e51ec2374093"
+        },
         {
           "bot": "Páidí",
           "bot_id": "110e6cb8-1c30-4a51-a786-e51ec2374093",
